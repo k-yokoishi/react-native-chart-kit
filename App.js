@@ -125,6 +125,8 @@ export default class App extends React.Component {
                 width={width}
                 height={height}
                 yAxisLabel="$"
+                yAxisMaxValue={200}
+                yAxisMinValue={-100}
                 chartConfig={chartConfig}
                 style={graphStyle}
                 onDataPointClick={({value, getColor}) =>
@@ -150,6 +152,8 @@ export default class App extends React.Component {
                 height={height}
                 data={data}
                 yAxisLabel="$"
+                yAxisMaxValue={200}
+                yAxisMinValue={-100}
                 chartConfig={chartConfig}
                 style={graphStyle}
               />
@@ -178,6 +182,8 @@ export default class App extends React.Component {
                 width={width}
                 height={height}
                 yAxisLabel="$"
+                yAxisMaxValue={200}
+                yAxisMinValue={-100}
                 chartConfig={chartConfig}
                 style={graphStyle}
               />

@@ -45,6 +45,8 @@ import {
     width={Dimensions.get('window').width} // from react-native
     height={220}
     yAxisLabel={'$'}
+    yAxisMaxValue={100}
+    yAxisMinValue={0}
     chartConfig={{
       backgroundColor: '#e26a00',
       backgroundGradientFrom: '#fb8c00',
@@ -123,6 +125,8 @@ const data = {
 | withInnerLines | boolean | Show inner dashed lines - default: True |
 | withOuterLines | boolean | Show outer dashed lines - default: True |
 | yAxisLabel | string | Prepend text to horizontal labels -- default: '' |
+| yAxisMaxValue | Number | Maximum value of horizontal label. Ignored if this is set to a value smaller than the maximum value of the data. |
+| yAxisMinValue | Number | Minimum value of horizontal label. Ignored if this is set to a value greater than the minimum value of the data. |
 | chartConfig | Object | Configuration object for the chart, see example config object above |
 |decorator | Function | This function takes a [whole bunch](https://github.com/indiespirit/react-native-chart-kit/blob/master/src/line-chart.js#L266) of stuff and can render extra elements, such as data point info or additional markup. |
 |onDataPointClick| Function| Callback that takes `{value, dataset, getColor}`|
@@ -188,6 +192,8 @@ const data = {
   width={screenWidth}
   height={220}
   yAxisLabel={'$'}
+  yAxisMaxValue={100}
+  yAxisMinValue={0}
   chartConfig={chartConfig}
 />
 ```
@@ -198,6 +204,8 @@ const data = {
 | width | Number | Width of the chart, use 'Dimensions' library to get the width of your screen for responsive |
 | height | Number | Height of the chart |
 | yAxisLabel | string | Prepend text to horizontal labels -- default: '' |
+| yAxisMaxValue | Number | Maximum value of horizontal label. Ignored if this is set to a value smaller than the maximum value of the data. |
+| yAxisMinValue | Number | Minimum value of horizontal label. Ignored if this is set to a value greater than the minimum value of the data. |
 | chartConfig | Object | Configuration object for the chart, see example config in the beginning of this file |
 
 ## StackedBar chart
@@ -210,7 +218,7 @@ const data ={
   legend: ['L1', 'L2', 'L3'],
   data: [
     [60, 60, 60],
-    [30,30,60], 
+    [30,30,60],
   ],
   barColors: ['#dfe4ea', '#ced6e0', '#a4b0be'],
  }

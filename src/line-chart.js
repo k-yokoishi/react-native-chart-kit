@@ -1,6 +1,7 @@
 import React from 'react'
 import {View} from 'react-native'
 import {Svg, Circle, Polygon, Polyline, Path, Rect, G} from 'react-native-svg'
+import _ from 'lodash'
 import AbstractChart from './abstract-chart'
 
 class LineChart extends AbstractChart {
@@ -31,9 +32,8 @@ class LineChart extends AbstractChart {
         const cx =
           paddingRight + (i * (width - paddingRight)) / dataset.data.length
         const cy =
-          (height / 4) *
-            3 *
-            (1 - (x - Math.min(...datas)) / this.calcScaler(datas)) +
+          (height / 4) * 13 *
+            (1 - (x - _.min([...datas, , this.props.yAxisMinValue])) / this.calcScaler(datas)) +
           paddingTop
         const onPress = () => {
           if (!onDataPointClick) {
@@ -89,9 +89,8 @@ class LineChart extends AbstractChart {
                   paddingRight +
                   (i * (width - paddingRight)) / dataset.data.length +
                   ',' +
-                  ((height / 4) *
-                    3 *
-                    (1 - (x - Math.min(...datas)) / this.calcScaler(datas)) +
+                  ((height / 4) * 3 *
+                    (1 - (x - _.min([...datas, , this.props.yAxisMinValue])) / this.calcScaler(datas)) +
                     paddingTop)
               )
               .join(' ') +
@@ -124,7 +123,7 @@ class LineChart extends AbstractChart {
           ',' +
           ((height / 4) *
             3 *
-            (1 - (x - Math.min(...datas)) / this.calcScaler(datas)) +
+            (1 - (x - _.min([...datas, , this.props.yAxisMinValue])) / this.calcScaler(datas)) +
             paddingTop)
       )
 
@@ -158,7 +157,7 @@ class LineChart extends AbstractChart {
         (height / 4) *
           3 *
           (1 -
-            (dataset.data[i] - Math.min(...datas)) / this.calcScaler(datas)) +
+            (dataset.data[i] - _.min([...datas, , this.props.yAxisMinValue])) / this.calcScaler(datas)) +
           paddingTop
       )
 

@@ -1,13 +1,18 @@
 import React, {Component} from 'react'
 
 import {LinearGradient, Line, Text, Defs, Stop} from 'react-native-svg'
+import _ from 'lodash'
 
 class AbstractChart extends Component {
-  calcScaler = data => Math.max(...data) - Math.min(...data) || 1
+  calcScaler = data => {
+    const max = _.max([...data, this.props.yAxisMaxValue])
+    const min = _.min([...data, this.props.yAxisMinValue])
+    return max - min || 1
+  }
 
   renderHorizontalLines = config => {
     const {count, width, height, paddingTop, paddingRight} = config
-    return [...new Array(count)].map((_, i) => {
+    return _.range(count).map(i => {
       return (
         <Line
           key={Math.random()}
@@ -51,14 +56,14 @@ class AbstractChart extends Component {
     const decimalPlaces = this.props.chartConfig.decimalPlaces || 2
     const yAxisLabel = this.props.yAxisLabel || ''
 
-    return [...new Array(count)].map((_, i) => {
+    return _.range(count).map(i => {
       let yLabel
 
       if (count === 1) {
         yLabel = `${yAxisLabel}${data[0].toFixed(decimalPlaces)}`
       } else {
         const label =
-          (this.calcScaler(data) / (count - 1)) * i + Math.min(...data)
+          (this.calcScaler(data) / (count - 1)) * i + _.min([...data, this.props.yAxisMinValue])
         yLabel = `${yAxisLabel}${label.toFixed(decimalPlaces)}`
       }
 
@@ -116,7 +121,7 @@ class AbstractChart extends Component {
 
   renderVerticalLines = config => {
     const {data, width, height, paddingTop, paddingRight} = config
-    return [...new Array(data.length)].map((_, i) => {
+    return _.range(data.length).map(i => {
       return (
         <Line
           key={Math.random()}

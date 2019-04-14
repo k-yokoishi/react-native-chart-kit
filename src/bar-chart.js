@@ -1,5 +1,6 @@
 import React from 'react'
 import {View} from 'react-native'
+import _ from 'lodash'
 import {Svg, Rect, G} from 'react-native-svg'
 import AbstractChart from './abstract-chart'
 
@@ -8,7 +9,7 @@ const barWidth = 32
 class BarChart extends AbstractChart {
   renderBars = config => {
     const {data, width, height, paddingTop, paddingRight} = config
-    const baseHeight = (height / 4 * 3) * (Math.max(...data) / this.calcScaler(data)) + paddingTop
+    const baseHeight = (height / 4 * 3) * (_.max([...data, this.props.yAxisMaxValue]) / this.calcScaler(data)) + paddingTop
     return data.map((x, i) => {
       const barHeight = height / 4 * 3 * (x / this.calcScaler(data))
       const barWidth = 32
@@ -31,7 +32,7 @@ class BarChart extends AbstractChart {
 
   renderBarTops = config => {
     const {data, width, height, paddingTop, paddingRight} = config
-    const baseHeight = (height / 4 * 3) * (Math.max(...data) / this.calcScaler(data)) + paddingTop
+    const baseHeight = (height / 4 * 3) * (_.max([...data, this.props.yAxisMaxValue]) / this.calcScaler(data)) + paddingTop
     return data.map((x, i) => {
       const barHeight = height / 4 * 3 * (x / this.calcScaler(data))
       return (
